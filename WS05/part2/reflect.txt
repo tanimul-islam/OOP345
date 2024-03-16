@@ -1,0 +1,50 @@
+/*Name: Tanimul Islam
+Email: tislam38@myseneca.ca
+ID: 129414223
+Section: ZAA
+Date: 11802/2024
+Module Name: reflect.txt
+********************************
+I have done all the coding by myself and only copied the code
+that my professor provided to complete my workshops and assignments.*/
+
+Reflection on Workshop Completion
+
+    Functor vs. Lambda Expression:
+        Implementation/Utilization: In this workshop, I encountered both functors and lambda expressions. A functor is a class or struct that overloads the function call operator operator(), allowing instances of the functor class to be called as if they were functions. On the other hand, a lambda expression is an anonymous function object that can capture variables from the surrounding scope and can be defined inline within code.
+        Appropriate Use:
+            Functor: Functors are useful when the functionality needs to be reused across multiple parts of the codebase or when the functionality is complex and requires state to be maintained. For example, in the SpellChecker class, the functor operator() is used to check and fix spelling errors in a string.
+            Lambda Expression: Lambda expressions are suitable for short, one-off operations that don't need to be reused elsewhere in the code. They are often used in algorithms or as arguments to higher-order functions like std::transform or std::sort. For instance, in the lambda expression adjustPrice in the main function, we adjust the price of books based on certain criteria.
+
+    Handling Exceptions in SpellChecker Constructor:
+        The constructor for SpellChecker generates an exception if it fails to open the provided dictionary file. To achieve the same result without exceptions, we can use error codes or error flags to indicate the success or failure of the constructor.
+        With Exceptions: In the original code, the constructor throws an exception if the file cannot be opened:
+explicit SpellChecker(const char* filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Cannot open dictionary file.");
+    }
+    // Other initialization logic...
+}
+
+    Without Exceptions: We can modify the constructor to return a success/failure status instead:
+    explicit SpellChecker(const char* filename, bool& success) {
+        std::ifstream file(filename);
+        if (!file.is_open()) {
+            success = false;
+            // Other error handling logic...
+        } else {
+            success = true;
+            // Other initialization logic...
+        }
+    }
+
+        Comparison: Using error flags or codes provides more control over error handling and allows the caller to decide how to handle errors.
+
+    Reducing Code Duplication in Movie and Book Classes:
+        The classes Movie and Book share almost identical logic for loading data from a file. To avoid duplication, we can create a base class, let's say Media, containing common functionality for loading data from a file. Then, Movie and Book can inherit from this base class and provide their specific implementations as needed.
+
+    Necessity of Default Constructors in Movie and Book Classes:
+        The default constructors in Movie and Book classes are not necessary if instances are always created using the custom constructors that take file input. Removing the default constructors can prevent accidental misuse and enforce the use of the custom constructors, leading to clearer code and better design. However, if there are situations where default-constructed instances are needed, then keeping the default constructors might be justified.
+
+Overall, completing this workshop provided valuable insights into various aspects of C++ programming, including exception handling, code organization, and design considerations. The challenges encountered, such as dealing with exceptions and reducing code duplication, helped deepen my understanding of these concepts and improve my problem-solving skills.

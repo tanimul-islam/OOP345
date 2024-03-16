@@ -1,0 +1,34 @@
+/*Name: Tanimul Islam
+Email: tislam38@myseneca.ca
+ID: 129414223
+Section: ZAA
+Date: 11/02/2024
+Module Name: reflect.txt
+********************************
+I have done all the coding by myself and only copied the code
+that my professor provided to complete my workshops and assignments.*/
+
+Difference between Composition and Aggregation:
+Composition: In the Child class, the toyObject attribute represents a composition relationship with the Toy class. This means that the Child class owns and manages the lifetime of Toy objects through a dynamically allocated array of pointers.
+Aggregation: In the ConfirmOrder class, the mToys attribute represents an aggregation relationship with the Toy class. This indicates that the ConfirmOrder class maintains a collection of pointers to Toy objects without owning them.
+Difference between Move and Copy Functions in Composition and Aggregation:
+
+Composition: In the Child class, both move and copy functions need to perform a deep copy or move of the owned Toy objects. This ensures that the Child object has its own independent copy of Toy objects.
+Aggregation: In the ConfirmOrder class, move and copy functions can perform shallow copies or moves of the pointers to Toy objects. This means that the ConfirmOrder object can share pointers to Toy objects without copying or moving the actual Toy objects themselves.
+Use of Association, Aggregation, and Composition:
+
+Association: Both the Child and ConfirmOrder classes have a relationship with the Toy class through pointers. In the Child class, the toyObject attribute represents an association with the Toy class. In the ConfirmOrder class, the mToys attribute represents an association with the Toy class.
+Composition: The Child class owns and manages the lifetime of Toy objects through a dynamically allocated array of pointers. The ConfirmOrder class maintains a collection of Toy objects without owning them.
+Aggregation: The ConfirmOrder class maintains a collection of pointers to Toy objects without owning them.
+Relationship between Child and Toy:
+
+The Child class has a composition relationship with the Toy class, as it owns and manages the lifetime of Toy objects through its toyObject attribute.
+Relationship between ConfirmOrder and Toy:
+
+The ConfirmOrder class has an aggregation relationship with the Toy class, as it maintains a collection of pointers to Toy objects through its mToys attribute.
+Use of trimSpaces, copyToy, and resizeArray:
+
+trimSpaces(std::string& str) in Toy Module: This function is used to remove leading and trailing spaces from a string, ensuring consistent formatting and preventing issues related to whitespace.
+copyToy(const Toy toys[], size_t numofToys) in Child Module:* This function is used to make a deep copy of an array of Toy pointers. It ensures that the Child class has its own independent copy of Toy objects, preventing issues related to shared ownership and dangling pointers.
+
+resizeArray() in ConfirmOrder Module: This function is used to resize the array of pointers to Toy objects dynamically. It ensures that the ConfirmOrder class can accommodate a variable number of Toy objects efficiently, preventing issues related to insufficient storage capacity.

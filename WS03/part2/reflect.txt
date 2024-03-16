@@ -1,0 +1,32 @@
+/*Name: Tanimul Islam
+Email: tislam38@myseneca.ca
+ID: 129414223
+Section: ZAA
+Date: 04/02/2024
+Module Name: reflect.txt
+********************************
+I have done all the coding by myself and only copied the code
+that my professor provided to complete my workshops and assignments.*/
+
+
+Specializing the add() member function in the Set module allows us to provide special instructions for handling different types of data. For instance, in the case of double numbers, we might want to consider them equal if their difference is very small. By specializing the add() function for doubles, we can customize its behavior to accommodate this requirement. This approach helps the code adapt to various data types and ensures consistent and appropriate handling of data within the Set class.
+Example of specializing the add() member function for doubles in the Set module:
+// Specialization for T = double
+template <>
+bool Set<double>::add(const double& item) {
+    for (size_t i = 0; i < this->size(); ++i) {
+        if (std::fabs(this->operator[](i) - item) <= 0.01) {
+            return false; // Already exists, so don't add
+        }
+    }
+    // Not found, add the item
+    return Collection<double, 100>::add(item);
+}
+
+Defining the class variable outside the class definition, such as a dummy object, promotes code organization, readability, and faster compilation. Placing class variables in a separate file helps maintain a clean and modular codebase by isolating implementation details from the class interface. This separation follows good programming principles by clearly delineating different parts of the code and simplifying code comprehension and maintenance.
+Example of defining a class variable outside the class definition:
+// Class variable defined outside the class definition
+template <typename T, int CAPACITY>
+T Collection<T, CAPACITY>::m_dummy{};
+
+Moreover, In this workshop, we've created the Collection and Set modules with only a header file. We didn't split the modules into *.h and *.cpp files like in previous workshops because using templates in separate files can lead to complications during compilation and linking. Keeping everything in one header file simplifies the development process, avoids potential template-related issues, and ensures that the compiler generates the correct code. Additionally, it facilitates better understanding and management of template-based classes. there.

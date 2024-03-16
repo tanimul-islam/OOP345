@@ -1,0 +1,35 @@
+/*Name: Tanimul Islam
+Email: tislam38@myseneca.ca
+ID: 129414223
+Section: ZAA
+Date: 17/01/2024
+********************************
+I have done all the coding by myself and only copied the code
+that my professor provided to complete my workshops and assignments.*/
+
+In this workshop, I've learned about external linkage, translation unit and static variables. For example, for global variable g_sysClock i've used extern keyword.
+extern size_t g_sysClock;
+The extern keyword indicates external linkage, meaning that the actual definition of g_sysClock is expected to be present in another translation unit (source file).This establishes internal linkage for the variable within the seneca namespace. Internal linkage means that the variable is only visible within the translation unit where it is defined.
+I've also learned about static keyword. Which i used for display function.
+static size_t counter = 1;
+The static keyword in this context means that counter retains its value between function calls, and its scope is limited to the display function. This static variable is useful for keeping track of the number of events and ensuring that each event has a unique number. Here, the counter increments each time display is called, providing a sequential numbering of events.
+In upgrading the Event class, several changes were made to enhance its functionality and memory management.
+
+Copy Constructor and Copy Assignment Operator:
+The copy constructor and copy assignment operator were implemented to properly handle deep copying of the eventDescription:
+Event::Event(const Event& src) {
+    *this = src;
+}
+
+Event& Event::operator=(const Event& src) {
+    // Implementation
+}
+This ensures that when an Event object is copied, a new memory block is allocated for the eventDescription to avoid shallow copying issues.
+
+I've also used destructor to ensure the dynamically allocated memory are released properly.
+Event::~Event() {
+    if (eventDescription != nullptr) {
+        delete[] eventDescription;
+        eventDescription = nullptr;
+    }
+}

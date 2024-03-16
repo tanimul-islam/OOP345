@@ -1,0 +1,52 @@
+/*Name: Tanimul Islam
+Email: tislam38@myseneca.ca
+ID: 129414223
+Section: ZAA
+Date: 27/01/2024
+Module Name: reflect.txt
+********************************
+I have done all the coding by myself and only copied the code
+that my professor provided to complete my workshops and assignments.*/
+
+In this workshop I've learned many new concepts of c++. First of all the chrono library for time clocking. On top of that, i got myself introduced with move constructor. And I've noticed some points while coding which are:
+1. Significant Time Difference Between Copy and Move Operations: In the StringSet class, both copy and move constructors and assignment operators are implemented. The significant time difference between copy and move operations arises from the fact that the move operations involve the transfer of ownership of resources, such as dynamically allocated memory. In the move operations, instead of creating a deep copy of the source object's data, the destination object "steals" the resources from the source. This results in a more efficient transfer, especially for large data structures, as it avoids unnecessary copying.
+// Move Constructor
+StringSet::StringSet(StringSet&& src) {
+    *this = std::move(src);
+}
+
+// Move Assignment Operator
+StringSet& StringSet::operator=(StringSet&& src) {
+    // ... Move semantics logic ...
+}
+
+2.Reading Input File in StringSet Constructor:
+In StringSet constructor, I read the input file (gutenberg_shakespeare) twice. First, to count the number of strings, and then to populate the dynamic array. While this approach is straightforward, it results in reading the file twice, which may be inefficient for large files.
+    One way to avoid rereading the file is to use a container that dynamically resizes as system read. For example, I could use a std::vector<std::string> to read strings from the file while dynamically resizing itself. This way, I only traverse the file once.
+// Using std::vector to dynamically resize while reading
+StringSet::StringSet(const char* filename) {
+    if (filename) {
+        ifstream readFile(filename);
+        std::vector<std::string> tempStrings;
+
+        // Counting and reading strings in one pass
+        while (readFile >> temp) {
+            tempStrings.push_back(temp);
+        }
+
+        // Now tempStrings.size() gives the number of strings
+        // Allocate memory and copy strings from vector to array
+        currentRecord = tempStrings.size();
+        str = new std::string[currentRecord];
+        std::copy(tempStrings.begin(), tempStrings.end(), str);
+    }
+}
+
+
+3.Difference Between steady_clock and system_clock:
+In the provided TimedEvents class, I use std::chrono::steady_clock to capture timestamps. It's crucial to understand the difference between steady_clock and system_clock.
+steady_clock: This clock provides a monotonic, non-adjustable clock. It is not affected by changes in the system time and is suitable for measuring durations.
+system_clock: This clock represents the system-wide real-time wall clock. It may be adjusted by the system, and it's suitable for representing the current time and date.
+In summary, steady_clock is more appropriate for measuring durations or intervals, while system_clock is used when you need to represent the current time. I have to choose the clock based on the specific use case to ensure accurate and reliable time measurements.
+
+Moreover, One potential challenge might be managing the memory properly in the StringSet class, especially in the copy and move operations. My implementation seems to handle this well, ensuring proper allocation and deallocation of memory in different scenarios. Another challenge might be correctly using and understanding the features of the chrono library. By referring to the provided documentation and examples, you seem to have successfully incorporated the library into your code.

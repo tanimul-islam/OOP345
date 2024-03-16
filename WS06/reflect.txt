@@ -1,0 +1,34 @@
+This workshop delved into advanced concepts of polymorphism, memory management, and exception handling in C++ programming. It focused on designing a system to manage various types of persons in a college setting using inheritance and dynamic memory allocation. Throughout the workshop, I encountered several challenges and gained valuable insights into these concepts.
+Deallocating Dynamically Allocated Memory:
+
+In the College class, a vector of pointers to Person objects is used to store different types of persons. Since these objects are dynamically allocated using new, it's essential to deallocate them to prevent memory leaks. The destructor of the College class is responsible for this task. Here's how it's done:
+College::~College() {
+    // Clean up dynamically allocated Person objects
+    for (Person* person : m_persons) {
+        delete person;
+    }
+}
+
+
+Handling Input Errors in loadData():
+
+The loadData() function reads data from an input file and constructs Person objects based on the input. Different errors can occur during this process, such as encountering an unknown type of person or encountering invalid data. To handle these errors, the function can detect them by checking the input data and throwing appropriate exceptions. Another solution could involve returning error codes instead of exceptions, but exceptions provide a cleaner and more structured way to handle errors in C++.
+
+void loadData(const char* filename, seneca::College& theCollege) {
+    // Read data from file and construct Person objects
+    try {
+        // Construct Person objects and add them to the College
+    } catch (const std::exception& e) {
+        std::cerr << "ERROR: " << e.what() << std::endl;
+        // Handle the error accordingly
+    }
+}
+
+Storing Collection of Persons:
+
+In this workshop, std::list<seneca::Person*> and std::vector<seneca::Person*> are used to store a collection of persons as pointers. This approach is chosen because it allows polymorphic behavior, meaning that different types of persons can be stored in the same container. Using std::list<seneca::Person> and std::vector<seneca::Person> without pointers wouldn't allow polymorphism and would slice the objects when stored in the container. Therefore, storing pointers to Person objects enables dynamic polymorphism and ensures that the specific behaviors of derived classes are preserved.
+
+std::list<const seneca::Person*> persons;
+std::vector<const seneca::Person*> persons;
+
+Overall, Workshop 6 provided valuable hands-on experience in implementing polymorphic behavior, managing dynamic memory, and handling exceptions effectively in C++ programming. Through tackling the challenges presented in the workshop, I gained a deeper understanding of these concepts and their practical applications.
