@@ -1,0 +1,37 @@
+//==============================================
+// Name:           Tanimul Islam
+// Student Number: 129414223
+// Email:          tislam38@myseneca.ca
+// Section:        ZAA
+// Date:           March 22, 2024
+// I have completed all the coding by myself and
+// copied only the code provided by the professor to submit my assignment.
+//==============================================
+// reflect.txt
+
+Completing the workshop involved implementing functionality for managing lists of products, descriptions, and prices in C++. Key tasks included:
+
+a. Defining class structures for Description, Price, and Product.
+b. Implementing a templated List class to store elements of any type.
+c. Overloading operators such as operator[] and operator+= for the List class.
+d. Utilizing raw pointers and smart pointers for memory management.
+
+1. Advantages of Smart Pointer Syntax:
+The use of smart pointers, such as std::unique_ptr, provides several advantages over raw pointers in terms of memory management and code safety.
+Automatic Memory Management: Smart pointers automatically handle memory deallocation when the pointer goes out of scope, reducing the risk of memory leaks. In the provided code, the operator+= overload taking a std::unique_ptr ensures that memory is properly deallocated when the List object is destroyed.
+void operator+=(const std::unique_ptr<T>& obj) {
+    list.push_back(*obj);
+}
+
+2.Ownership Semantics: Smart pointers enforce clear ownership semantics, which helps prevent issues like dangling pointers and memory leaks. By passing a std::unique_ptr to the List class, ownership of the object is transferred, ensuring exclusive ownership and automatic cleanup when the List object goes out of scope.
+
+Issues like dangling pointers and memory leaks can significantly impact the reliability and stability of C++ code. By passing a std::unique_ptr to the List class, ownership of the object is transferred, ensuring exclusive ownership and automatic cleanup when the List object goes out of scope.
+
+The difference between raw and smart pointer syntax is substantial in terms of memory management and code safety. In the provided code, the operator+= overload taking a raw pointer (const T* obj) allows adding elements to the List by copying the object pointed to by the pointer. However, raw pointers require manual memory management, including explicit allocation and deallocation, which can lead to memory leaks and dangling pointers if not handled carefully.
+void operator+=(const T* obj) {
+    list.push_back(*obj);
+}
+On the other hand, the operator+= overload taking a std::unique_ptr (const std::unique_ptr<T>& obj) transfers ownership of the object to the List class, ensuring automatic memory management and exclusive ownership semantics. Smart pointers provide safety and clarity by enforcing ownership semantics and automatically managing memory without the need for explicit deallocation.
+void operator+=(const std::unique_ptr<T>& obj) {
+    list.push_back(*obj);
+}

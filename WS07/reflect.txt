@@ -1,0 +1,18 @@
+//==============================================
+// Name:           Tanimul Islam
+// Student Number: 129414223
+// Email:          tislam38@myseneca.ca
+// Section:        ZAA
+// Date:           March 16, 2024
+// I have completed all the coding by myself and
+// copied only the code provided by the professor to submit my assignment.
+//==============================================
+// reflect.txt
+
+In completing this workshop, I've deepened my understanding of C++ and the Standard Template Library (STL), particularly focusing on its algorithms. Throughout the workshop, I utilized several key STL functions such as std::sort, std::find_if, and std::copy_if to manipulate and process collections of songs efficiently. These functions were chosen for their ability to provide clear and concise solutions to common programming tasks, improving code readability and maintainability.
+
+One notable advantage of using STL algorithms over manual implementation with loops is their readability, maintainability, and performance benefits. STL algorithms offer optimized solutions to common problems, leveraging compiler optimizations and potentially parallel execution for enhanced performance. Additionally, their modular nature promotes code reuse and extensibility, enabling easy adaptation to changing requirements without modifying the core logic.
+
+One challenge encountered was ensuring robust error handling in the sorting function, where the client specifies a field name. To address this, I redesigned the function to accept an enum representing valid field names, ensuring type safety and compile-time error detection for invalid inputs. This approach enhances code reliability and prevents runtime errors by enforcing strict validation of input parameters.
+
+Overall, completing this workshop has reinforced my skills in utilizing STL algorithms effectively, while also highlighting the importance of error handling and robust design practices in software development.
